@@ -17,4 +17,21 @@ public:
 };
 
 
+// 以Cpeople为基类派生出COrdinaryPerson和CPolice两个类
+class COrdinaryPerson: public CPeople{
+public:
+    COrdinaryPerson(int idNumber, bool gender, int age);
+    ~COrdinaryPerson();
+};
+
+
+class CPolice :public CPeople {
+private:
+    int policeNumber;
+
+public:
+    CPolice(int idNumber, bool gender, int age, int policeNumber);
+    ~CPolice();
+};
+
 #endif //FINALEXAM_CPEOPLE_H

@@ -61,12 +61,6 @@ build CMakeFiles/FinalExam.dir/CPeople.cpp.o: CXX_COMPILER__FinalExam_Debug /cyg
   OBJECT_DIR = CMakeFiles/FinalExam.dir
   OBJECT_FILE_DIR = CMakeFiles/FinalExam.dir
 
-build CMakeFiles/FinalExam.dir/COrdinaryPerson.cpp.o: CXX_COMPILER__FinalExam_Debug /cygdrive/d/codes/CLion/FinalExam/COrdinaryPerson.cpp || cmake_object_order_depends_target_FinalExam
-  DEP_FILE = CMakeFiles/FinalExam.dir/COrdinaryPerson.cpp.o.d
-  FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles/FinalExam.dir
-  OBJECT_FILE_DIR = CMakeFiles/FinalExam.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target FinalExam
@@ -75,7 +69,7 @@ build CMakeFiles/FinalExam.dir/COrdinaryPerson.cpp.o: CXX_COMPILER__FinalExam_De
 #############################################
 # Link the executable FinalExam.exe
 
-build FinalExam.exe: CXX_EXECUTABLE_LINKER__FinalExam_Debug CMakeFiles/FinalExam.dir/main.cpp.o CMakeFiles/FinalExam.dir/CPeople.cpp.o CMakeFiles/FinalExam.dir/COrdinaryPerson.cpp.o
+build FinalExam.exe: CXX_EXECUTABLE_LINKER__FinalExam_Debug CMakeFiles/FinalExam.dir/main.cpp.o CMakeFiles/FinalExam.dir/CPeople.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/FinalExam.dir

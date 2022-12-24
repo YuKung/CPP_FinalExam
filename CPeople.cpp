@@ -6,3 +6,9 @@
 
 CPeople::CPeople(int IDNumber, bool gender, int age) {};
 CPeople::~CPeople() {};
+
+COrdinaryPerson::COrdinaryPerson(int idNumber, bool gender, int age): CPeople(idNumber,gender,age){};
+COrdinaryPerson::~COrdinaryPerson() {};
+
+CPolice::CPolice(int idNumber, bool gender, int age, int policeNumber) : CPeople(idNumber, gender, age),policeNumber(policeNumber) {};
+CPolice::~CPolice() {};
