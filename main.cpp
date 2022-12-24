@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#
+#include <thread>
 #include "CPeople.h"
 #include "CCollectionStation.h"
 
@@ -13,11 +13,11 @@ vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin)
 // void GeneratePoints();
 
 int main() {
-    vector<COrdinaryPoint*> ordinaryPoints;            // 用一个类指针数组存储同一类检测点，并各初始化一个检测点queue的STL会被自动初始化为空
+    vector<COrdinaryPoint*> ordinaryPoints;             // 用一个类指针数组存储同一类检测点，并各初始化一个检测点queue的STL会被自动初始化为空
     auto firstOrdinaryPoint= new COrdinaryPoint;
     ordinaryPoints.push_back(firstOrdinaryPoint);
 
-    vector<CDedicatedPoint*> dedicatedPoints;
+    vector<CDedicatedPoint*> dedicatedPoints;           // 同上
     auto firstDedicatedPoint = new CDedicatedPoint;
     dedicatedPoints.push_back(firstDedicatedPoint);
 
@@ -26,26 +26,32 @@ int main() {
 
     for (int i = 0; i < 30; ++i) {         // 30循环30次代表30分钟
         // sleep！
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));    // 阻塞线程 使屏幕每秒输出有间隔
         vector<CPeople*> peoplePerMin;
         int generateNum;                      // 控制每分钟生成的人数
         static default_random_engine engine;
-        uniform_int_distribution<int> numGenerator;
+        uniform_int_distribution<int> numGenerator(10,50);
         generateNum = numGenerator(engine);
         GeneratePeople(generateNum,peoplePerMin);
 
+
         for (int j = 0; j < generateNum; ++j) {      // 每分钟先将生成的人数全部分配给相应的检测点
             if (peoplePerMin[j]->GetClassType() == "Police"){
-                dedicatedPoints[0]->queue.push(*(peoplePerMin[j]));      // 将所有的警察都分配到第一个特殊检测点
+                dedicatedPoints[0]->queue.push((peoplePerMin[j]));      // 将所有的警察都分配到第一个特殊检测点 队列中存储的是人的指针！！！ 因为使用了多态要这样才能编译通过
             }
             else if (peoplePerMin[j]->GetClassType() == "Ordinary Person"){
-                ordinaryPoints[0]->queue.push(*(peoplePerMin[j]));       // 将所有普通人分配到第一个普通检测点   ！！！ 后面会动态优化！！！
+                ordinaryPoints[0]->queue.push((peoplePerMin[j]));       // 将所有普通人分配到第一个普通检测点   ！！！ 后面会动态优化！！！
             }
         }
-        /*for (int i = 0; i < 20; ++i) {
+
+        ordinaryPoints[0]->printfInfo(0);
+        dedicatedPoints[0]->printfInfo(0);
+       /* for (int i = 0; i < 20; ++i) {
             // cout << peoplePerMin[i]->age << endl;
             //cout << typeid(*peoplePerMin[i]).name() << endl;
             cout << peoplePerMin[i]->GetClassType() << endl;
         }*/
+
     }
     return 0;
 }
