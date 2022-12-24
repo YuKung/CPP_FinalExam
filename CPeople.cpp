@@ -4,7 +4,7 @@
 
 #include "CPeople.h"
 
-CPeople::CPeople(int IDNumber, bool gender, int age) {};
+CPeople::CPeople(int IDNumber, bool gender, int age):IDNumber(IDNumber), gender(gender), age(age) {};
 CPeople::~CPeople() {};
 
 COrdinaryPerson::COrdinaryPerson(int idNumber, bool gender, int age): CPeople(idNumber,gender,age){};

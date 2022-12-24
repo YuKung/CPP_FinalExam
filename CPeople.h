@@ -8,10 +8,11 @@
 class CPeople{
 private:
     int IDNumber;
-    bool gender;                    // 0代表男，1代表女
-    int age;
+    bool gender;                    // 1代表男，0代表女
+
 
 public:
+    int age;
     CPeople(int IDNumber, bool gender, int age);
     ~CPeople();
 };
