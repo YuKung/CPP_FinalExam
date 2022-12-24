@@ -1,0 +1,3 @@
+/cygdrive/d/codes/CLion/FinalExam/cmake-build-debug/CMakeFiles/FinalExam.dir
+/cygdrive/d/codes/CLion/FinalExam/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cygdrive/d/codes/CLion/FinalExam/cmake-build-debug/CMakeFiles/rebuild_cache.dir
