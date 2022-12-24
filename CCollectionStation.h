@@ -14,18 +14,19 @@ public:
     CCollectionStation();
     ~CCollectionStation();
     const int acquisitionSpeed=5;
+    //virtual printinfo;
 private:
 };
 
 class COrdinaryPoint:public CCollectionStation{
 public:
-    std::queue<COrdinaryPerson> queue;
+    std::queue<CPeople> queue;
 
 };
 
 class CDedicatedPoint:public CCollectionStation{
 public:
-    std::queue<CPolice> queue;
+    std::queue<CPeople> queue;
 };
 
 #endif //FINALEXAM_CCOLLECTIONSTATION_H

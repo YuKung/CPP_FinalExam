@@ -9,18 +9,44 @@ using namespace std;
 
 int policeCount = 0, OrdinaryPersonCount = 0, totalCount = 0;  // 计数的全局变量
 
-vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin);
-void GenratePoints();
+vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin);    // 用来生成每分钟的人
+// void GeneratePoints();
 
 int main() {
-    vector<CPeople*> peoplePerMin;
-    GeneratePeople(20,peoplePerMin);
-    /*for (int i = 0; i < 20; ++i) {
-        // cout << peoplePerMin[i]->age << endl;
-        //cout << typeid(*peoplePerMin[i]).name() << endl;
-        cout << peoplePerMin[i]->GetClassType() << endl;
-    }*/
+    vector<COrdinaryPoint*> ordinaryPoints;            // 用一个类指针数组存储同一类检测点，并各初始化一个检测点queue的STL会被自动初始化为空
+    auto firstOrdinaryPoint= new COrdinaryPoint;
+    ordinaryPoints.push_back(firstOrdinaryPoint);
 
+    vector<CDedicatedPoint*> dedicatedPoints;
+    auto firstDedicatedPoint = new CDedicatedPoint;
+    dedicatedPoints.push_back(firstDedicatedPoint);
+
+   /* cout<< firstOrdinaryPoint->queue.size() <<endl;   // 测试排队人数
+    cout<< firstDedicatedPoint->queue.size() <<endl;*/
+
+    for (int i = 0; i < 30; ++i) {         // 30循环30次代表30分钟
+        // sleep！
+        vector<CPeople*> peoplePerMin;
+        int generateNum;                      // 控制每分钟生成的人数
+        static default_random_engine engine;
+        uniform_int_distribution<int> numGenerator;
+        generateNum = numGenerator(engine);
+        GeneratePeople(generateNum,peoplePerMin);
+
+        for (int j = 0; j < generateNum; ++j) {      // 每分钟先将生成的人数全部分配给相应的检测点
+            if (peoplePerMin[j]->GetClassType() == "Police"){
+                dedicatedPoints[0]->queue.push(*(peoplePerMin[j]));      // 将所有的警察都分配到第一个特殊检测点
+            }
+            else if (peoplePerMin[j]->GetClassType() == "Ordinary Person"){
+                ordinaryPoints[0]->queue.push(*(peoplePerMin[j]));       // 将所有普通人分配到第一个普通检测点   ！！！ 后面会动态优化！！！
+            }
+        }
+        /*for (int i = 0; i < 20; ++i) {
+            // cout << peoplePerMin[i]->age << endl;
+            //cout << typeid(*peoplePerMin[i]).name() << endl;
+            cout << peoplePerMin[i]->GetClassType() << endl;
+        }*/
+    }
     return 0;
 }
 
