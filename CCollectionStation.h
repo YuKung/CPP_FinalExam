@@ -7,8 +7,20 @@
 
 
 class CCollectionStation {
+public:
+    CCollectionStation();
+    ~CCollectionStation();
+private:
+
 
 };
 
+class COrdinaryPoint:public CCollectionStation{
+
+};
+
+class CDedicatedPoint:public CCollectionStation{
+
+};
 
 #endif //FINALEXAM_CCOLLECTIONSTATION_H

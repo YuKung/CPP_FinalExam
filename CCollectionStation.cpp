@@ -3,3 +3,6 @@
 //
 
 #include "CCollectionStation.h"
+
+CCollectionStation::CCollectionStation() {};
+CCollectionStation::~CCollectionStation() {};
