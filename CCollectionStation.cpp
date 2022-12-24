@@ -9,13 +9,14 @@
 
 CCollectionStation::CCollectionStation() {};
 CCollectionStation::~CCollectionStation() {};
+void CCollectionStation::printfInfo(int index) {};
 
 void CCollectionStation::printfInfo(int index) {};
 
 void COrdinaryPoint::printfInfo(int index){                       // 重写虚函数
-    std::cout << "\nThis is ordinary point " << index <<std::endl;
-    std::cout << "Now there are" << " " <<queue.size() << " " << "ordinary people queuing" << std::endl;
-    std::cout << "-----------------------------------------------------------------"<< std::endl;
+    std::cout << "\nThis is ordinary point " << index+1 <<"."<<std::endl;
+    std::cout << "There are" << " " <<queue.size() << " " << "ordinary people queuing." << std::endl;
+    std::cout << "--------------------------------------"<< std::endl;
     std::cout << "Their information is as follows:" << std::endl;
 
     std::cout << std::setw(5) <<"ID" << std::setw(9)<< "sex" <<std::setw(6) <<"age" << std::endl;
@@ -32,12 +33,13 @@ void COrdinaryPoint::printfInfo(int index){                       // 重写虚�
         }
         std::cout <<std::setw(7) << memberPtr->IDNumber <<std::setw(8)<< sex << std::setw(5) << memberPtr->age <<std::endl;   // 打印第一个成员的信息
     };
+
 };
 
 void CDedicatedPoint::printfInfo(int index){
-    std::cout << "\nThis is dedicated police " << index <<std::endl;
-    std::cout << "Now there are" << " " <<queue.size() << " " << "polices queuing" << std::endl;
-    std::cout << "-----------------------------------------------------------------"<< std::endl;
+    std::cout << "\nThis is dedicated police " << index+1 << "." <<std::endl;
+    std::cout << "There are" << " " <<queue.size() << " " << "polices queuing." << std::endl;
+    std::cout << "--------------------------------------"<< std::endl;
     std::cout << "Their information is as follows:" << std::endl;
 
     std::cout << std::setw(5) <<"ID" << std::setw(9)<< "sex" <<std::setw(6) <<"age" << std::setw(16) << "police number" <<std::endl;
@@ -54,5 +56,6 @@ void CDedicatedPoint::printfInfo(int index){
         }
         std::cout <<std::setw(7) << memberPtr->IDNumber <<std::setw(8)<< sex << std::setw(5) << memberPtr->age << std::setw(10) << memberPtr->getPoliceNumber() <<std::endl;   // 打印第一个成员的信息
     };
+
 
 };
