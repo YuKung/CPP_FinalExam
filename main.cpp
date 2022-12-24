@@ -10,15 +10,17 @@ using namespace std;
 int policeCount = 0, OrdinaryPersonCount = 0, totalCount = 0;  // 计数的全局变量
 
 vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin);
+void GenratePoints();
 
 int main() {
     vector<CPeople*> peoplePerMin;
     GeneratePeople(20,peoplePerMin);
-    for (int i = 0; i < 20; ++i) {
+    /*for (int i = 0; i < 20; ++i) {
         // cout << peoplePerMin[i]->age << endl;
         //cout << typeid(*peoplePerMin[i]).name() << endl;
         cout << peoplePerMin[i]->GetClassType() << endl;
-    }
+    }*/
+
     return 0;
 }
 

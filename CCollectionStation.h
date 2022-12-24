@@ -8,23 +8,24 @@
 #include <queue>
 #include "CPeople.h"
 
-template<class T>
+
 class CCollectionStation {
 public:
     CCollectionStation();
     ~CCollectionStation();
-    std::queue<T> queue;              // 从模板类继承 提高代码可重用性 比如以后还能方便地继承得到更多类型的检测点！！！！
+    const int acquisitionSpeed=5;
 private:
+};
+
+class COrdinaryPoint:public CCollectionStation{
+public:
+    std::queue<COrdinaryPerson> queue;
 
 };
 
-class COrdinaryPoint:public CCollectionStation<COrdinaryPerson>{
-
-};
-
-class CDedicatedPoint:public CCollectionStation<CPolice>{
-
-
+class CDedicatedPoint:public CCollectionStation{
+public:
+    std::queue<CPolice> queue;
 };
 
 #endif //FINALEXAM_CCOLLECTIONSTATION_H
