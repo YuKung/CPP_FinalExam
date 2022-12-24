@@ -14,7 +14,9 @@ int main() {
     vector<CPeople*> peoplePerMin;
     GeneratePeople(20,peoplePerMin);
     for (int i = 0; i < 20; ++i) {
-        cout << peoplePerMin[i]->age << endl;
+        // cout << peoplePerMin[i]->age << endl;
+        //cout << typeid(*peoplePerMin[i]).name() << endl;
+        cout << peoplePerMin[i]->GetClassType() << endl;
     }
     return 0;
 }
@@ -49,4 +51,3 @@ vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin)
     }
     return peoplePerMin;
 }
-
