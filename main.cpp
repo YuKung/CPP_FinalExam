@@ -5,24 +5,25 @@
 #include "CPeople.h"
 #include "CCollectionStation.h"
 
+#define ACQUISITION_SPEED_PER_MIN 5;
+
 using namespace std;
 
 int policeCount = 0, OrdinaryPersonCount = 0, totalCount = 0;  // 计数的全局变量
 
 vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin);    // 用来生成每分钟的人
+int findTheShortestQueue(vector<COrdinaryPoint*> ordinaryPoints);
+void addOneNewPoint();
 // void GeneratePoints();
 
 int main() {
-    vector<COrdinaryPoint*> ordinaryPoints;             // 用一个类指针数组存储同一类检测点，并各初始化一个检测点queue的STL会被自动初始化为空
+    vector<COrdinaryPoint*> ordinaryPoints;             // 用一个类指针vector存储同一类检测点，并各初始化一个检测点queue的STL会被自动初始化为空
     auto firstOrdinaryPoint= new COrdinaryPoint;
     ordinaryPoints.push_back(firstOrdinaryPoint);
 
     vector<CDedicatedPoint*> dedicatedPoints;           // 同上
     auto firstDedicatedPoint = new CDedicatedPoint;
     dedicatedPoints.push_back(firstDedicatedPoint);
-
-   /* cout<< firstOrdinaryPoint->queue.size() <<endl;   // 测试排队人数
-    cout<< firstDedicatedPoint->queue.size() <<endl;*/
 
     for (int i = 0; i < 30; ++i) {         // 30循环30次代表30分钟
         // sleep！
@@ -34,23 +35,26 @@ int main() {
         generateNum = numGenerator(engine);
         GeneratePeople(generateNum,peoplePerMin);
 
-
-        for (int j = 0; j < generateNum; ++j) {      // 每分钟先将生成的人数全部分配给相应的检测点
+        // 每分钟先将生成的人数全部分配给相应的检测点
+        for (int j = 0; j < generateNum; ++j) {       // 这里一次循环分配一个待排队的人
             if (peoplePerMin[j]->GetClassType() == "Police"){
                 dedicatedPoints[0]->queue.push((peoplePerMin[j]));      // 将所有的警察都分配到第一个特殊检测点 队列中存储的是人的指针！！！ 因为使用了多态要这样才能编译通过
             }
             else if (peoplePerMin[j]->GetClassType() == "Ordinary Person"){
-                ordinaryPoints[0]->queue.push((peoplePerMin[j]));       // 将所有普通人分配到第一个普通检测点   ！！！ 后面会动态优化！！！
+                int min = 0;
+                min = findTheShortestQueue(ordinaryPoints);// sort返回人最少的平民站的下标 ,min
+                // if ordinaryPoints[min].size > 10; add new 向新的站中加
+                ordinaryPoints[min]->queue.push((peoplePerMin[j]));       // 将所有普通人分配到第一个普通检测点   ！！！ 后面会动态优化！！！
             }
         }
 
-        ordinaryPoints[0]->printfInfo(0);
+
+        for (int j = 0; j < ordinaryPoints.size(); ++j) {                           // 每分钟每个站排完队五个人
+            ordinaryPoints[j]->printfInfo(j);                                // 平民打印当前排队信息
+            // Point.queue.pop() 5次
+        }
+
         dedicatedPoints[0]->printfInfo(0);
-       /* for (int i = 0; i < 20; ++i) {
-            // cout << peoplePerMin[i]->age << endl;
-            //cout << typeid(*peoplePerMin[i]).name() << endl;
-            cout << peoplePerMin[i]->GetClassType() << endl;
-        }*/
 
     }
     return 0;
@@ -64,13 +68,13 @@ vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin)
         bernoulli_distribution IsPoliceBool(0.2);    // 伯努利试验,因为警察相比普通人肯定更少，所以p我们不妨设为0.3
         IsPolice[i] = IsPoliceBool(engine);           // 将每次的布尔值记录下来
     }
-    for (int i = 0; i < GenerateNum; ++i) {        // 生成两种people
-        uniform_int_distribution<int> id(100000,200000);    // 利用均匀分布生成ID号，范围在100000~200000之间
-        uniform_int_distribution<int> age(1,150);           // 利用均匀分布生成年龄
-        bernoulli_distribution isMale(0.5);      // 生成判断性别的布尔值
-        if (IsPolice[i] == 0){                  //  如果不是警察
+    for (int i = 0; i < GenerateNum; ++i) {                                 // 生成两种people
+        uniform_int_distribution<int> id(100000,200000);            // 利用均匀分布生成ID号，范围在100000~200000之间
+        uniform_int_distribution<int> age(1,150);                   // 利用均匀分布生成年龄
+        bernoulli_distribution isMale(0.5);                         // 生成判断性别的布尔值
+        if (IsPolice[i] == 0){                                      //  如果不是警察
             auto *ordinaryPerson = new COrdinaryPerson(id(engine),isMale(engine),age(engine));
-            peoplePerMin.push_back(ordinaryPerson);        // 将生成的对象指针存储
+            peoplePerMin.push_back(ordinaryPerson);                     // 将生成的对象指针存储
             // delete ordinaryPerson;
             OrdinaryPersonCount++;
             totalCount++;
@@ -86,3 +90,18 @@ vector<CPeople*> GeneratePeople(int GenerateNum, vector<CPeople*> &peoplePerMin)
     }
     return peoplePerMin;
 }
+
+
+int findTheShortestQueue(vector<COrdinaryPoint*> ordinaryPoints){
+    int min = 0;   // min代表人最少的ordinaryPoint的下标
+    for (int i = 0; i < ordinaryPoints.size(); ++i) {           // 遍历所有的ordinaryPoints
+        if (ordinaryPoints[i]->queue.size() < ordinaryPoints[min]->queue.size() ){    // 若该ordinaryPoint人更少则更新min
+            min = i;
+        }
+    }
+    return min;
+};
+
+void addOneNewPoint(){
+
+};
