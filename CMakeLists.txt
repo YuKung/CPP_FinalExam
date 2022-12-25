@@ -3,4 +3,4 @@ project(FinalExam)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(FinalExam main.cpp CPeople.h CPeople.cpp CCollectionStation.cpp CCollectionStation.h)
+add_executable(FinalExam main.cpp CPeople.h CPeople.cpp CCollectionPoint.cpp CCollectionPoint.h CCollectionStationOperation.cpp CCollectionStationOperation.h)

@@ -61,8 +61,14 @@ build CMakeFiles/FinalExam.dir/CPeople.cpp.o: CXX_COMPILER__FinalExam_Debug /cyg
   OBJECT_DIR = CMakeFiles/FinalExam.dir
   OBJECT_FILE_DIR = CMakeFiles/FinalExam.dir
 
-build CMakeFiles/FinalExam.dir/CCollectionStation.cpp.o: CXX_COMPILER__FinalExam_Debug /cygdrive/d/codes/CLion/FinalExam/CCollectionStation.cpp || cmake_object_order_depends_target_FinalExam
-  DEP_FILE = CMakeFiles/FinalExam.dir/CCollectionStation.cpp.o.d
+build CMakeFiles/FinalExam.dir/CCollectionPoint.cpp.o: CXX_COMPILER__FinalExam_Debug /cygdrive/d/codes/CLion/FinalExam/CCollectionPoint.cpp || cmake_object_order_depends_target_FinalExam
+  DEP_FILE = CMakeFiles/FinalExam.dir/CCollectionPoint.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles/FinalExam.dir
+  OBJECT_FILE_DIR = CMakeFiles/FinalExam.dir
+
+build CMakeFiles/FinalExam.dir/CCollectionStationOperation.cpp.o: CXX_COMPILER__FinalExam_Debug /cygdrive/d/codes/CLion/FinalExam/CCollectionStationOperation.cpp || cmake_object_order_depends_target_FinalExam
+  DEP_FILE = CMakeFiles/FinalExam.dir/CCollectionStationOperation.cpp.o.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles/FinalExam.dir
   OBJECT_FILE_DIR = CMakeFiles/FinalExam.dir
@@ -75,7 +81,7 @@ build CMakeFiles/FinalExam.dir/CCollectionStation.cpp.o: CXX_COMPILER__FinalExam
 #############################################
 # Link the executable FinalExam.exe
 
-build FinalExam.exe: CXX_EXECUTABLE_LINKER__FinalExam_Debug CMakeFiles/FinalExam.dir/main.cpp.o CMakeFiles/FinalExam.dir/CPeople.cpp.o CMakeFiles/FinalExam.dir/CCollectionStation.cpp.o
+build FinalExam.exe: CXX_EXECUTABLE_LINKER__FinalExam_Debug CMakeFiles/FinalExam.dir/main.cpp.o CMakeFiles/FinalExam.dir/CPeople.cpp.o CMakeFiles/FinalExam.dir/CCollectionPoint.cpp.o CMakeFiles/FinalExam.dir/CCollectionStationOperation.cpp.o
   FLAGS = -g
   LINK_FLAGS = -Wl,--enable-auto-import
   OBJECT_DIR = CMakeFiles/FinalExam.dir
