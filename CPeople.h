@@ -33,9 +33,9 @@ public:
 
 class CPolice :public CPeople {
 public:
+    int policeNumber;
     CPolice(int idNumber, bool gender, int age, int policeNumber);
     ~CPolice();
-    int policeNumber;
     std::string GetClassType() override;
     int getPoliceNumber()  override;       // 返回警号 因为所有的对象都存储在基类指针数组中，这种情况下基类没有的成员变量只能通过虚函数访问
 };

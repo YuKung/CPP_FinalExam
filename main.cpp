@@ -11,13 +11,14 @@ using namespace std;
 int main() {
     int simulation = 0;
     while (true){
-        cout << "/***This is a program which simulates the queues of a collection station conducts nucleic acid collection for 30 minutes***/" << endl;
-        cout << "/***Please enter any number (except 0) to conduct one stimulation and enter 0 to end the program***/" <<endl;
+        cout << "\\***This is a program which simulates the queues of a collection station conducts nucleic acid collection for 30 minutes***/" << endl;
+        cout << "         \\***Please enter any number (except 0) to conduct one stimulation and enter 0 to end the program***/" <<endl;
         int flag;
         cin >> flag;
         switch (flag) {
             case 0: {
-                cout << "\nGoodbye！You have conducted " << simulation << " simulation(s) in total!" << endl;
+                cout << "\n\n----------------------------------------------------"<< endl;
+                cout << "Goodbye！You have conducted " << simulation << " simulation(s) in total!" << endl;
                 exit(0);
             };
             default:{
@@ -55,7 +56,6 @@ int main() {
                             dedicatedPoints[0]->queue.push((peoplePerMin[j]));  // 将所有的警察都分配到唯一的特殊检测点 队列中存储的是基类指针！！！ 因为使用了多态要这样才能编译通过
                         }
                         else if (peoplePerMin[j]->GetClassType() == "Ordinary Person"){     // 若该人的身份为普通人
-
                             min = CCollectionStationOperation::FindTheShortestQueue(ordinaryPoints, min);        // 查询当前排队人数最少的ordinaryPoint的队列
                             ordinaryPoints[min]->queue.push(peoplePerMin[j]);                               // 将该普通人分配到当前人数最少的ordinaryPoint
                             min = CCollectionStationOperation::FindTheShortestQueue(ordinaryPoints, min);      // 更新min
